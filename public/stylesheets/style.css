@@ -184,6 +184,15 @@ i{
 }
 
 @media screen and (max-width: 768px) {
+  h1{
+    font-size: 2rem;
+    margin-top: 2px;
+  }
+
+  .conteudo{
+    height: calc(100% - 48px);
+  }
+  
   .infoChat{
     display: none!important;
     height: 100%;
@@ -212,13 +221,36 @@ i{
     height: 100%;
   }
 
+  .chatLinha img{
+    width:70px;
+    height: 70px;
+  }
+  
+  .voceChatLinha img{
+    width:70px;
+  }
+
   .botao{
     padding-right: 0;
     padding-left: 0;
+    max-width: 19%;
   }
 
   .icones{
     padding:0 5px;
+  }
+
+  .texto{
+    max-width: 64%;
+    padding-right: 10px;
+  }
+
+  #muteButton{
+    margin-left:5px;
+  }
+
+  #recordButton{
+    margin-left: 10px;
   }
 
   .buttonToggle{
@@ -227,6 +259,7 @@ i{
 
   .buttonToggle i{
     padding: 0 5px;
+    margin-bottom: 9px;
   }
 
   .buttonToggle:focus{
@@ -235,5 +268,6 @@ i{
     
   .img img{
     width:50%;
+    margin-top: 10px;
   }
 }

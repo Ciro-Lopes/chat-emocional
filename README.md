@@ -1,2 +1,0 @@
-# Projeto Chat Assistente Emocional
- 

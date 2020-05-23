@@ -162,6 +162,14 @@ i{
     font-size:.8rem;
   }
 
+  .chatBalao{
+    max-width: 75%;
+  }
+  
+  .voceChatBalao{
+    max-width: 75%;
+  }
+
   .chatBalao p, .voceChatBalao p{
     font-size: .8rem;
   }
@@ -228,6 +236,14 @@ i{
   
   .voceChatLinha img{
     width:70px;
+  }
+
+  .chatBalao{
+    max-width: 75%;
+  }
+  
+  .voceChatBalao{
+    max-width: 75%;
   }
 
   .botao{

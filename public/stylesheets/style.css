@@ -17,8 +17,9 @@ body{
 .buttonToggle{
   position:fixed;
   left:0;
-  height: 56px;
+  height: 48px;
   border:0 none;
+  padding-top:7px;
   background-color:#7EA4B7;
   display:none;
 }
@@ -36,6 +37,7 @@ body{
   background-color: #95cddc;
   border-right: 1px solid #4B676F;
   display: flex!important;
+  overflow-y: scroll;
 }
 
 .img{

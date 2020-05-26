@@ -1,0 +1,73 @@
+.p0{
+    padding:0;
+}
+
+.mv{
+    margin:10px 0;
+}
+
+.mh{
+    margin:0 10px;
+}
+
+html{
+    height: 100%;
+}
+  
+body{
+    height: 100%;
+    background-color: #95CDDC;
+    background-image: url(../images/Vector.png);
+
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    -o-background-size: 100% auto;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position-y: bottom;
+}
+
+nav{
+    background-color: #7EA4B7;
+    height: 56px;
+}
+
+.conteudo{
+    height: calc(100vh - 56px);
+}
+
+img{
+    width:70%;
+}
+
+.chatBalao{
+    background-color:#fff;
+    display: inline-table;
+    width:100%;
+    border:1px solid #4D4C4D;
+    border-radius: 25px;
+  }
+  
+  .chatBalao p{
+    margin:0;
+    font-size: .9rem;
+    padding: 10px;
+    text-align: justify;
+  }
+
+a:hover {
+    text-decoration: none;
+    color:#495057;
+}
+
+@media screen and (max-width: 768px){
+    .mh{
+        margin:0 5px;
+    }
+}
+
+@media screen and (max-width: 400px){
+    .chatBalao p, a, button{
+        font-size: .8rem!important;
+    }
+}

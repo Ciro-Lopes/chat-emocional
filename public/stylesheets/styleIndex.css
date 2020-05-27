@@ -73,7 +73,6 @@ img{
 .chatBalao{
     background-color:#fff;
     display: inline-table;
-    width:100%;
     border:1px solid #4D4C4D;
     border-radius: 25px;
   }

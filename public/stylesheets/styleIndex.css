@@ -36,6 +36,32 @@ nav{
     height: 56px;
 }
 
+.buttonMusic{
+    background-color: #95cddc;
+}
+
+.buttonMusic:focus{
+    outline: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+}
+
+.active{
+    background-color: #95cddc!important;
+    color:#212529!important;
+}
+
+.dropdown-item:focus{
+    background-color: #95cddc!important;
+    color:#212529!important;
+}
+
+nav i{
+    cursor: pointer;
+    color:#495057;
+    font-size: 1.2rem;
+}
+
 .conteudo{
     height: calc(100% - 56px);
 }

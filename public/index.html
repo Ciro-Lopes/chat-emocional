@@ -17,38 +17,6 @@
 <body>
     <div class="container-fluid p0">
         <nav class="nav justify-content-center">
-            <div
-                class="row h-100 align-items-center justify-content-between col-10 ml col-md-6 col-sm-6 col-lg-5 col-xl-4">
-                <div class="col-4 pl0">
-                    <div class="dropdown">
-                        <button value="0" class="btn dropdown-toggle buttonMusic" role="button" id="dropdownMenuLink"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Nenhuma
-                        </button>
-
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <button id="0" value="Nenhuma" onClick="trocarDrop(this.id);"
-                                class="dropdown-item">Nenhuma</button>
-                            <button id="1" value="Rock" onClick="trocarDrop(this.id);"
-                                class="dropdown-item">Rock</button>
-                            <button id="2" value="Celta" onClick="trocarDrop(this.id);"
-                                class="dropdown-item">Celta</button>
-                            <button id="3" value="Classica" onClick="trocarDrop(this.id);"
-                                class="dropdown-item">Classica</button>
-                            <button id="4" value="Chuva" onClick="trocarDrop(this.id);"
-                                class="dropdown-item">Chuva</button>
-                            <button id="5" value="Riacho" onClick="trocarDrop(this.id);"
-                                class="dropdown-item">Riacho</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2"><i id="playPouse" onClick="pausePLay();" class="fas fa-play"></i></div>
-                <div class="col-2"><i id="volume" class="fas fa-volume-up"></i></div>
-                <div class="col-4">
-                    <input id="volControl" class="form-control-range" onchange="changeVolume(this.value);" type="range"
-                        min="0" max="100" step="1">
-                </div>
-            </div>
         </nav>
     </div>
     <div class="d-flex justify-content-center conteudo">

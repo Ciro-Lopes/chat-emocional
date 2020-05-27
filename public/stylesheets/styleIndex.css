@@ -106,6 +106,18 @@ a:hover {
     .conteudo{
         height: calc(100% - 48px);
     }
+
+    .dropdown button{
+        padding:5px!important;
+    }
+
+    .pl0{
+        padding-left: 0;
+    }
+
+    .ml{
+        margin-left: 20px;
+    }
 }
 
 @media screen and (max-width: 400px){
@@ -127,5 +139,17 @@ a:hover {
 
     .conteudo{
         height: calc(100% - 48px);
+    }
+
+    .dropdown button{
+        padding:5px!important;
+    }
+
+    .pl0{
+        padding-left: 0;
+    }
+
+    .ml{
+        margin-left: 20px;
     }
 }

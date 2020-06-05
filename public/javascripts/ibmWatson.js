@@ -28,65 +28,59 @@ function sendMessageToAssistant(textMessage) {
   var objDiv = document.getElementById("chat");
   objDiv.scrollTop = objDiv.scrollHeight;
 
-  $.post("/ibmWatson/translate", { text: textMessage }, function (
-    returnedData,
-    statusRequest
-  ) {
-    if (returnedData === "ERRO") console.log(returnedData.data);
-    else {
-      console.log(textMessage);
-      alert("Texto: " + returnedData);
-      chat.innerHTML +=
-        "<div class='chatLinha'>" +
-        "<img src='/images/Anna.png'>" +
-        "<div class='chatBalao'>" +
-        "<p>" +
-        returnedData.data.result.translations[0].translation +
-        "</p>" +
-        "</div>" +
-        "</div>";
-    }
-  }).fail();
-
-  //post para o serviço watsonAssistant
-  $.post(
-    "/ibmWatson/assistant",
-    { text: textMessage, contextDialog },
-    //tratamento de sucesso de processamento do post
+  // tradutor
+  $.post("/ibmWatson/translate",
+    { text: textMessage },
+    //tratamento de sucesso do post
     function (returnedData, statusRequest) {
-      //se ocorreu algum erro no processamento da API
-      if (returnedData.status === "ERRO") alert(returnedData.data);
-      //caso os dados tenham retornado com sucesso
+      // tratamento de erro da API
+      if (returnedData.status === 'ERRO')
+        console.log(returnedData.data);
+      // sucesso da API
       else {
-        //retorno da API e recupera o contexto para o proximo dialogo
-        chat.innerHTML +=
-          "<div class='chatLinha'>" +
-          "<img src='/images/Anna.png'>" +
-          "<div class='chatBalao'>" +
-          "<p>" +
-          returnedData.data.result.output.text +
-          "</p>" +
-          "</div>" +
-          "</div>";
-        contextDialog = JSON.stringify(returnedData.data.result.context);
+        // pega a traducao da API 
+        var traducao = returnedData.data.result.translations[0].translation;
+        //post para o serviço watsonAssistant
+        $.post(
+          "/ibmWatson/assistant",
+          { text: traducao, contextDialog },
+          //tratamento de sucesso de processamento do post
+          function (returnedData, statusRequest) {
+            //se ocorreu algum erro no processamento da API
+            if (returnedData.status === "ERRO") alert(returnedData.data);
+            //caso os dados tenham retornado com sucesso
+            else {
+              //retorno da API e recupera o contexto para o proximo dialogo
+              chat.innerHTML +=
+                "<div class='chatLinha'>" +
+                "<img src='/images/Anna.png'>" +
+                "<div class='chatBalao'>" +
+                "<p>" +
+                returnedData.data.result.output.text +
+                "</p>" +
+                "</div>" +
+                "</div>";
+              contextDialog = JSON.stringify(returnedData.data.result.context);
 
-        objDiv.scrollTop = objDiv.scrollHeight;
+              objDiv.scrollTop = objDiv.scrollHeight;
 
-        //se o browser nao for chrome ou se tiver habilitado o som da pagina
-        //chama o servico text to speech, passando o retorno do assistant
-        if (
-          navigator.userAgent.indexOf("Chrome") === -1 ||
-          $("#muteButton").attr("class").match("off")
+              //se o browser nao for chrome ou se tiver habilitado o som da pagina
+              //chama o servico text to speech, passando o retorno do assistant
+              if (
+                navigator.userAgent.indexOf("Chrome") === -1 ||
+                $("#muteButton").attr("class").match("off")
+              )
+                sendTextToSpeech(
+                  JSON.stringify(returnedData.data.result.output.text)
+                );
+            }
+          }
         )
-          sendTextToSpeech(
-            JSON.stringify(returnedData.data.result.output.text)
-          );
+          //tratamento de erro do post
+          .fail(function (returnedData) {
+            alert("Erro: " + returnedData.status + " " + returnedData.statusText);
+          });
       }
-    }
-  )
-    //tratamento de erro do post
-    .fail(function (returnedData) {
-      alert("Erro: " + returnedData.status + " " + returnedData.statusText);
     });
 }
 

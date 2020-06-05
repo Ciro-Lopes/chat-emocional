@@ -11,13 +11,16 @@ function sendMessageToAssistant(textMessage) {
 
   if (textMessage === undefined || textMessage === "") textMessage = "";
   // exibe mensagem na tela
-  else chat.innerHTML +=
-    "<div class='voceChatLinha'>" +
-    "<div class='voceChatBalao'>" +
-    "<p>" + textMessage + "</p>" +
-    "</div>" +
-    "<img src='/images/voce.png'/>" +
-    "</div>";
+  else
+    chat.innerHTML +=
+      "<div class='voceChatLinha'>" +
+      "<div class='voceChatBalao'>" +
+      "<p>" +
+      textMessage +
+      "</p>" +
+      "</div>" +
+      "<img src='/images/voce.png'/>" +
+      "</div>";
 
   //limpa o campo input
   document.chatForm.textMessage.value = "";
@@ -25,14 +28,34 @@ function sendMessageToAssistant(textMessage) {
   var objDiv = document.getElementById("chat");
   objDiv.scrollTop = objDiv.scrollHeight;
 
+  $.post("/ibmWatson/translate", { text: textMessage }, function (
+    returnedData,
+    statusRequest
+  ) {
+    if (returnedData === "ERRO") console.log(returnedData.data);
+    else {
+      console.log(textMessage);
+      alert("Texto: " + returnedData);
+      chat.innerHTML +=
+        "<div class='chatLinha'>" +
+        "<img src='/images/Anna.png'>" +
+        "<div class='chatBalao'>" +
+        "<p>" +
+        returnedData.data.result.translations[0].translation +
+        "</p>" +
+        "</div>" +
+        "</div>";
+    }
+  }).fail();
+
   //post para o serviço watsonAssistant
-  $.post("/ibmWatson/assistant",
+  $.post(
+    "/ibmWatson/assistant",
     { text: textMessage, contextDialog },
     //tratamento de sucesso de processamento do post
     function (returnedData, statusRequest) {
       //se ocorreu algum erro no processamento da API
-      if (returnedData.status === "ERRO")
-        alert(returnedData.data);
+      if (returnedData.status === "ERRO") alert(returnedData.data);
       //caso os dados tenham retornado com sucesso
       else {
         //retorno da API e recupera o contexto para o proximo dialogo
@@ -40,7 +63,9 @@ function sendMessageToAssistant(textMessage) {
           "<div class='chatLinha'>" +
           "<img src='/images/Anna.png'>" +
           "<div class='chatBalao'>" +
-          "<p>" + returnedData.data.result.output.text + "</p>" +
+          "<p>" +
+          returnedData.data.result.output.text +
+          "</p>" +
           "</div>" +
           "</div>";
         contextDialog = JSON.stringify(returnedData.data.result.context);
@@ -125,8 +150,7 @@ $(document).keypress(function (event) {
 $(document).ready(function () {
   //pedir para habilitar o som, caso for o chrome
   if (navigator.userAgent.indexOf("Chrome") != -1) {
-    document
-      .getElementById("muteButton")
+    document.getElementById("muteButton");
   }
 
   sendMessageToAssistant();
@@ -136,8 +160,7 @@ $(document).ready(function () {
 function allowAutoPlay() {
   if ($("#muteButton").attr("class") == "fas fa-volume-off") {
     $("#muteButton").attr("class", "fas fa-volume-mute");
-  }
-  else {
+  } else {
     $("#muteButton").attr("class", "fas fa-volume-off");
   }
 }
